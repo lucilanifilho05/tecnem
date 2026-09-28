@@ -1,0 +1,29 @@
+{
+  "informacoesGerais": {
+    "periodo": "28/09 a 26/11",
+    "festa": {
+      "data": "27/11",
+      "local": "Quadra da Escola",
+      "metaPontos": 15750
+    }
+  },
+  "turmas": [
+    { "nome": "1º Ano A - Desenvolvimento de Sistemas", "pontos": 16200, "frequencia": "98.5%", "entregas": "99.0%", "pontualidade": "98.0%" },
+    { "nome": "1º Ano B - Desenvolvimento de Sistemas", "pontos": 15900, "frequencia": "96.0%", "entregas": "97.5%", "pontualidade": "95.0%" },
+    { "nome": "1º Ano B - Linguagens e Códigos", "pontos": 15800, "frequencia": "95.5%", "entregas": "96.0%", "pontualidade": "94.0%" },
+    { "nome": "1º Ano C - Linguagens e Códigos", "pontos": 15760, "frequencia": "95.0%", "entregas": "95.0%", "pontualidade": "93.0%" },
+    { "nome": "2º Ano - Mecatrônica", "pontos": 16050, "frequencia": "97.0%", "entregas": "98.0%", "pontualidade": "96.0%" },
+    { "nome": "2º Ano - Desenvolvimento de Sistemas", "pontos": 16400, "frequencia": "99.0%", "entregas": "98.5%", "pontualidade": "97.5%" },
+    { "nome": "3º Ano A - Desenvolvimento de Sistemas", "pontos": 16850, "frequencia": "99.5%", "entregas": "100%", "pontualidade": "99.0%" },
+    { "nome": "3º Ano B - Desenvolvimento de Sistemas", "pontos": 16100, "frequencia": "97.5%", "entregas": "97.0%", "pontualidade": "95.5%" },
+    { "nome": "3º Ano - Eletrotécnica", "pontos": 15850, "frequencia": "96.5%", "entregas": "95.5%", "pontualidade": "94.5%" }
+  ],
+  "calendario": [
+    { "data": "28/09", "turmas": "Todas as Turmas", "atividade": "Início da Competição TECNEM e Liberação dos Indicadores" },
+    { "data": "10/10", "turmas": "1º e 2º Anos", "atividade": "1ª Intervenção Pontual (Desafio Coletivo)" },
+    { "data": "25/10", "turmas": "3º Anos (A, B e Eletrotécnica)", "atividade": "2ª Intervenção Pontual (Apresentação de Projetos)" },
+    { "data": "15/11", "turmas": "Todas as Turmas", "atividade": "3ª Intervenção Pontual e Fechamento de Indicadores Mensais" },
+    { "data": "26/11", "turmas": "Todas as Turmas", "atividade": "Encerramento da Apuração Oficial" },
+    { "data": "27/11", "turmas": "Todas as Turmas", "atividade": "Evento de Premiação & Festa com DJ na Quadra" }
+  ]
+}
