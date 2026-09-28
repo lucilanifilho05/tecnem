@@ -58,3 +58,64 @@ function renderizarCalendario(eventos) {
     calendario.append(item);
   });
 }
+
+// A navegação dos banners funciona independentemente do carregamento do ranking.
+document.addEventListener('DOMContentLoaded', iniciarCarrossel);
+function iniciarCarrossel() {
+  const carousel = document.querySelector('.carousel');
+  if (!carousel) return;
+  const slides = [...carousel.querySelectorAll('.carousel-slide')];
+  const dots = [...carousel.querySelectorAll('[data-slide]')];
+  const play = carousel.querySelector('.carousel-play');
+  const status = carousel.querySelector('.carousel-status');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let current = 0;
+  let paused = reducedMotion.matches;
+  let hovered = false;
+  let timer;
+  let touchStart = null;
+  carousel.querySelector('.carousel-controls').hidden = false;
+
+  function schedule() {
+    clearInterval(timer);
+    play.textContent = paused ? 'Reproduzir' : 'Pausar';
+    play.setAttribute('aria-label', paused ? 'Iniciar troca automática de banners' : 'Pausar troca automática de banners');
+    if (!paused && !hovered && !document.hidden) timer = setInterval(() => show(current + 1), 7000);
+  }
+  function show(index, manual = false) {
+    current = (index + slides.length) % slides.length;
+    slides.forEach((slide, i) => { slide.hidden = i !== current; });
+    dots.forEach((dot, i) => dot.setAttribute('aria-current', String(i === current)));
+    if (manual) {
+      paused = true;
+      status.textContent = `Banner ${current + 1} de ${slides.length}`;
+    }
+    schedule();
+  }
+  carousel.querySelectorAll('[data-direction]').forEach(button => button.addEventListener('click', () => show(current + Number(button.dataset.direction), true)));
+  dots.forEach(button => button.addEventListener('click', () => show(Number(button.dataset.slide), true)));
+  play.addEventListener('click', () => { paused = !paused; schedule(); });
+  carousel.addEventListener('mouseenter', () => { hovered = true; schedule(); });
+  carousel.addEventListener('mouseleave', () => { hovered = false; schedule(); });
+  carousel.addEventListener('focusin', () => { paused = true; schedule(); });
+  carousel.addEventListener('keydown', event => {
+    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+    event.preventDefault();
+    show(current + (event.key === 'ArrowRight' ? 1 : -1), true);
+  });
+  const surface = carousel.querySelector('.carousel-slides');
+  surface.addEventListener('touchstart', event => {
+    touchStart = { x: event.touches[0].clientX, y: event.touches[0].clientY };
+  }, { passive: true });
+  surface.addEventListener('touchend', event => {
+    if (!touchStart) return;
+    const dx = event.changedTouches[0].clientX - touchStart.x;
+    const dy = event.changedTouches[0].clientY - touchStart.y;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) show(current + (dx < 0 ? 1 : -1), true);
+    touchStart = null;
+  }, { passive: true });
+  surface.addEventListener('touchcancel', () => { touchStart = null; }, { passive: true });
+  document.addEventListener('visibilitychange', schedule);
+  reducedMotion.addEventListener('change', () => { if (reducedMotion.matches) { paused = true; schedule(); } });
+  schedule();
+}
